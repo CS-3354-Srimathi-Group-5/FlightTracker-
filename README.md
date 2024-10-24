@@ -56,7 +56,7 @@ Before you begin, make sure you have the following installed on your system:
 
 1. **Clone the Repository**:
    ```bash
-   git clone (the git link)
+   git clone https://github.com/CS-3354-Srimathi-Group-5/FlightTracker-.git
    cd flight-tracker/flight-tracker
    ```
 
