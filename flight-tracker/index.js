@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 
 // Hardcoded AviationStack API Key (ensure to move back to environment variable after fixing)
-const API_KEY = '84afc636d2ec960016b8485444b88f5b'; // Replace with your actual API key
+const API_KEY = '9806658acd76f2bf3bebfac9d15d078d'; // Replace with your actual API key
 
 // Add logging to check the coordinates received from the API
 function filterDFWFlights(flights) {
