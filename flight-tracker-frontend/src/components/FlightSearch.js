@@ -6,7 +6,7 @@ import {
   sortFlightsByAirlineName, 
   sortFlightsByStatus, 
   sortFlightsByFlightNumber 
-} from '../flightSorting';
+} from './FlightSorting';
 
 const FlightSearch = ({ onFlightsUpdate }) => {
   const [flightNumber, setFlightNumber] = useState('');
