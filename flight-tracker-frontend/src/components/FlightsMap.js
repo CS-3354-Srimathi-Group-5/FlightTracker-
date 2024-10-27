@@ -1,11 +1,17 @@
-//Everyone worked on this file
-//FlightMap component displays a map with markers for flights related to DFW
+// Everyone worked on this file
+// FlightMap component displays a map with markers for flights related to DFW
 
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-//Bukunmi, Ashraful, and Jahnavi worked on this part 
+// Bukunmi, Ashraful, and Jahnavi worked on this part
+// Test Cases:
+// F16.1: Flight Radar - Verify radar view for real-time flight positions
+//        Real-time data available -> Flight positions are displayed on the radar.
+// F14.1: View Flight Path on Map - Validate display of flight path on map
+//        User selects a valid flight -> Map shows real-time/planned flight path.
+
 // Helper function to validate if a coordinate is correct
 const isValidCoordinate = (lat, lon) => lat !== null && lon !== null && !isNaN(lat) && !isNaN(lon);
 
@@ -32,8 +38,7 @@ const formatToCST = (time) => {
   });
 };
 
-
-//Manish, Warren, and Nowsin worked on this part
+// Manish, Warren, and Nowsin worked on this part
 // React component for displaying the flights map
 const FlightsMap = ({ flights }) => {
   // Set the initial center of the map to DFW Airport coordinates
@@ -70,11 +75,11 @@ const FlightsMap = ({ flights }) => {
             ? [flight.live.latitude, flight.live.longitude]
             : null;
 
-          //Rayyan worked on this part
+          // Rayyan worked on this part
           return (
             // Use React Fragment to avoid extra DOM elements
             <React.Fragment key={index}>
-              {/* Render a red dot for the departure airport (WORK IN PROGRESS)*/}
+              {/* Test Case F14.1: Render a marker for the departure airport (WORK IN PROGRESS)*/}
               {departurePosition && (
                 <Marker position={departurePosition}>
                   <Popup>
@@ -83,10 +88,11 @@ const FlightsMap = ({ flights }) => {
                     Estimated: {formatToCST(flight.departure.estimated)}<br />
                     Actual: {formatToCST(flight.departure.actual)}
                   </Popup>
+                  {/* Circle to represent departure airport */}
                   <Circle center={departurePosition} pathOptions={{ color: 'red' }} radius={10000} />
                 </Marker>
               )}
-              {/* Render a red dot for the arrival airport (WORK IN PROGRESS)*/}
+              {/* Test Case F14.1: Render a marker for the arrival airport (WORK IN PROGRESS)*/}
               {arrivalPosition && (
                 <Marker position={arrivalPosition}>
                   <Popup>
@@ -95,10 +101,11 @@ const FlightsMap = ({ flights }) => {
                     Estimated: {formatToCST(flight.arrival.estimated)}<br />
                     Actual: {formatToCST(flight.arrival.actual)}
                   </Popup>
+                  {/* Circle to represent arrival airport */}
                   <Circle center={arrivalPosition} pathOptions={{ color: 'red' }} radius={10000} />
                 </Marker>
               )}
-              {/* Render a blue dot if the flight is live */}
+              {/* Test Case F16.1: Render a marker for the live position of the flight */}
               {livePosition && (
                 <Marker position={livePosition}>
                   <Popup>
@@ -115,6 +122,7 @@ const FlightsMap = ({ flights }) => {
                     Scheduled Arrival: {formatToCST(flight.arrival.scheduled)}<br />
                     Estimated Arrival: {formatToCST(flight.arrival.estimated)}<br />
                   </Popup>
+                  {/* Circle to represent live flight position */}
                   <Circle center={livePosition} pathOptions={{ color: 'blue' }} radius={5000} />
                 </Marker>
               )}
