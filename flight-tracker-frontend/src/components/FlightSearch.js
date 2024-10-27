@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-//Worked on by Jahnavi, Bukunmi, Manish
+//Worked on by Jahnavi, Bukunmi, Manish, and Warren
 // FlightSearch component allows users to search for flights by flight number
 const FlightSearch = ({ onFlightsUpdate }) => {
   // State to store the user's input flight number
