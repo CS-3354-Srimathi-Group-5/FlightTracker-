@@ -1,7 +1,11 @@
+//Everyone worked on this file
+//FlightMap component displays a map with markers for flights related to DFW
+
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
+//Bukunmi, Ashraful, and Jahnavi worked on this part 
 // Helper function to validate if a coordinate is correct
 const isValidCoordinate = (lat, lon) => lat !== null && lon !== null && !isNaN(lat) && !isNaN(lon);
 
@@ -28,25 +32,31 @@ const formatToCST = (time) => {
   });
 };
 
-const FlightsMap = ({ flights }) => {
-  const mapCenter = [32.8998, -97.0403]; // DFW Airport coordinates
-  const mapZoom = 7;
 
-  // Helper function to determine if a flight is live
+//Manish, Warren, and Nowsin worked on this part
+// React component for displaying the flights map
+const FlightsMap = ({ flights }) => {
+  // Set the initial center of the map to DFW Airport coordinates
+  const mapCenter = [32.8998, -97.0403]; // DFW Airport coordinates
+  const mapZoom = 7; // Initial zoom level for the map
+
+  // Helper function to determine if a flight is currently live
   const isLiveFlight = (flight) => flight.live && isValidCoordinate(flight.live.latitude, flight.live.longitude);
 
   return (
     <div style={{ height: '600px', width: '100%' }}>
       <h2>DFW-Related Flights</h2>
+      {/* Initialize the map container with the center and zoom */}
       <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: '100%', width: '100%' }}>
+        {/* Add a TileLayer for the map (OpenStreetMap in this case) */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {/* Render flights data if available */}
+        {/* Iterate over the flights data to render markers */}
         {flights.map((flight, index) => {
-          // Validate the coordinates before using them
+          // Validate the coordinates for departure and arrival locations
           const departurePosition = isValidCoordinate(flight.departure.location.lat, flight.departure.location.lon)
             ? [flight.departure.location.lat, flight.departure.location.lon]
             : null;
@@ -55,13 +65,16 @@ const FlightsMap = ({ flights }) => {
             ? [flight.arrival.location.lat, flight.arrival.location.lon]
             : null;
 
+          // Get the live position of the flight if it's live
           const livePosition = isLiveFlight(flight)
             ? [flight.live.latitude, flight.live.longitude]
             : null;
 
+          //Rayyan worked on this part
           return (
+            // Use React Fragment to avoid extra DOM elements
             <React.Fragment key={index}>
-              {/* Render a red dot for departure airport */}
+              {/* Render a red dot for the departure airport (WORK IN PROGRESS)*/}
               {departurePosition && (
                 <Marker position={departurePosition}>
                   <Popup>
@@ -73,7 +86,7 @@ const FlightsMap = ({ flights }) => {
                   <Circle center={departurePosition} pathOptions={{ color: 'red' }} radius={10000} />
                 </Marker>
               )}
-              {/* Render a red dot for arrival airport */}
+              {/* Render a red dot for the arrival airport (WORK IN PROGRESS)*/}
               {arrivalPosition && (
                 <Marker position={arrivalPosition}>
                   <Popup>

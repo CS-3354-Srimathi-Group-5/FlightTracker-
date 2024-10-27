@@ -1,26 +1,33 @@
+//Rayyan Waris 
+//Use Case: View flight board to check the status of arrivals or departures at DFW Airport.
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+// FlightBoard component displays arrival and departure flight data for DFW
 const FlightBoard = () => {
+  // State to store arrival and departure flight data
   const [arrivals, setArrivals] = useState([]);
   const [departures, setDepartures] = useState([]);
+  // Loading state to indicate when data is being fetched
   const [loading, setLoading] = useState(true);
+  // Error state to handle any issues with fetching data
   const [error, setError] = useState(null);
 
-  // Function to convert UTC time to 12-hour format and Central Time, then add 5 hours
+  // Function to format UTC time to 12-hour format in Central Time, then add 5 hours
   const formatTimeToCentral = (utcTime) => {
     if (!utcTime) return 'Unknown';
     
     // Convert UTC time to a JavaScript Date object
     const date = new Date(utcTime);
     
-    // Convert to Central Time
+    // Convert the date to Central Time
     const centralTime = new Date(date.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
     
     // Add 5 hours to the Central Time
     centralTime.setHours(centralTime.getHours() + 5);
 
-    // Format the adjusted time to 12-hour format
+    // Format the adjusted time to 12-hour format with a readable string
     return centralTime.toLocaleString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
@@ -31,33 +38,39 @@ const FlightBoard = () => {
     });
   };
 
+  // Fetch flight data when the component mounts
   useEffect(() => {
     const fetchFlightData = async () => {
       try {
-        setLoading(true);
+        setLoading(true); // Set loading state to true while fetching data
 
-        // Fetch arrivals and departures from your backend
+        // Fetch arrivals and departures data from the backend API
         const arrivalsResponse = await axios.get('http://localhost:5001/api/flights/arrivals');
         const departuresResponse = await axios.get('http://localhost:5001/api/flights/departures');
 
+        // Update state with fetched data
         setArrivals(arrivalsResponse.data);
         setDepartures(departuresResponse.data);
-        setLoading(false);
+        setLoading(false); // Stop loading when data is fetched
       } catch (error) {
+        // Set an error message if the request fails
         setError('Error fetching flight data');
-        setLoading(false);
+        setLoading(false); // Stop loading in case of an error
       }
     };
 
-    fetchFlightData();
+    fetchFlightData(); // Call the fetch function
   }, []);
 
+  // Display a loading message while fetching data
   if (loading) return <div>Loading flight data...</div>;
+  // Display an error message if data fetching fails
   if (error) return <div>{error}</div>;
 
   return (
     <div>
       <h1>Flight Board - Dallas (DFW)</h1>
+      {/* Arrivals Section */}
       <div>
         <h2>Arrivals</h2>
         <table>
@@ -71,6 +84,7 @@ const FlightBoard = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Map through arrivals data and create a table row for each flight */}
             {arrivals.map((flight, index) => (
               <tr key={index}>
                 <td>{flight.flightNumber}</td>
@@ -83,6 +97,7 @@ const FlightBoard = () => {
           </tbody>
         </table>
       </div>
+      {/* Departures Section */}
       <div>
         <h2>Departures</h2>
         <table>
@@ -96,6 +111,7 @@ const FlightBoard = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Map through departures data and create a table row for each flight */}
             {departures.map((flight, index) => (
               <tr key={index}>
                 <td>{flight.flightNumber}</td>
