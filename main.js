@@ -25,12 +25,16 @@ app.get('/flight-duration/:flightNumber', async (req, res) => {
     const flightData = response.data.data[0];
 
     if (flightData) {
-      // Log flightData for debugging
       console.log(flightData);
 
-      // Check if both departure and arrival times are valid
-      const timeDeparted = new Date(flightData.departure?.actual);
-      const timeLanded = new Date(flightData.arrival?.actual);
+      // Check if flight status is 'cancelled' to skip calculation
+      if (flightData.flight_status === 'cancelled') {
+        return res.status(500).json({ error: 'Flight is cancelled. Duration unavailable.' });
+      }
+
+      // Use actual times if available; otherwise, fall back to estimated or scheduled times
+      const timeDeparted = new Date(flightData.departure.actual || flightData.departure.estimated || flightData.departure.scheduled);
+      const timeLanded = new Date(flightData.arrival.actual || flightData.arrival.estimated || flightData.arrival.scheduled);
 
       // Ensure both times are valid dates
       if (isNaN(timeDeparted) || isNaN(timeLanded)) {
@@ -39,15 +43,25 @@ app.get('/flight-duration/:flightNumber', async (req, res) => {
 
       const duration = (timeLanded - timeDeparted) / (1000 * 60); // Duration in minutes
 
-      // Ensure duration is positive
+      // Handle cases where arrival time is before departure time
       if (duration < 0) {
         return res.status(500).json({ error: 'Arrival time is before departure time.' });
+      }
+
+      // Customize duration message based on flight status
+      let durationMessage;
+      if (flightData.flight_status === 'scheduled') {
+        durationMessage = `Scheduled flight duration: ${duration} minutes`;
+      } else if (flightData.flight_status === 'en-route') {
+        durationMessage = `Estimated flight duration (in-transit): ${duration} minutes`;
+      } else {
+        durationMessage = `Actual flight duration: ${duration} minutes`;
       }
 
       const flightInfo = {
         departure_city: flightData.departure.airport || 'Unknown',
         arrival_city: flightData.arrival.airport || 'Unknown',
-        flight_duration: `${duration} minutes`,
+        flight_duration: durationMessage,
       };
 
       res.json(flightInfo);
@@ -55,7 +69,7 @@ app.get('/flight-duration/:flightNumber', async (req, res) => {
       res.status(404).json({ message: 'Flight not found' });
     }
   } catch (error) {
-    console.error(error); // Log the error for debugging
+    console.error(error);
     res.status(500).json({ error: 'Error fetching flight data' });
   }
 });
