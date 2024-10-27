@@ -1,18 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // Helper function to validate if a coordinate is correct
 const isValidCoordinate = (lat, lon) => lat !== null && lon !== null && !isNaN(lat) && !isNaN(lon);
 
+// Helper function to convert UTC time to CST and bump 5 hours ahead
+const formatToCST = (time) => {
+  if (!time) return 'N/A';
+  
+  // Parse the input time as UTC
+  const date = new Date(time);
+  
+  // Add 5 hours to the current UTC time
+  date.setHours(date.getHours() + 5);
+  
+  // Convert the adjusted time to CST
+  return date.toLocaleString('en-US', {
+    timeZone: 'America/Chicago',
+    hour12: true,
+    weekday: 'long',
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
+
 const FlightsMap = ({ flights }) => {
   const mapCenter = [32.8998, -97.0403]; // DFW Airport coordinates
   const mapZoom = 7;
-
-  // Debugging: Log the flights data to ensure it's correct
-  useEffect(() => {
-    console.log('Flights data:', JSON.stringify(flights, null, 2));
-  }, [flights]);
 
   // Helper function to determine if a flight is live
   const isLiveFlight = (flight) => flight.live && isValidCoordinate(flight.live.latitude, flight.live.longitude);
@@ -48,9 +66,9 @@ const FlightsMap = ({ flights }) => {
                 <Marker position={departurePosition}>
                   <Popup>
                     <strong>Departure Airport: {flight.departure.airport}</strong><br />
-                    Scheduled: {flight.departure.scheduled}<br />
-                    Estimated: {flight.departure.estimated}<br />
-                    Actual: {flight.departure.actual}
+                    Scheduled: {formatToCST(flight.departure.scheduled)}<br />
+                    Estimated: {formatToCST(flight.departure.estimated)}<br />
+                    Actual: {formatToCST(flight.departure.actual)}
                   </Popup>
                   <Circle center={departurePosition} pathOptions={{ color: 'red' }} radius={10000} />
                 </Marker>
@@ -60,9 +78,9 @@ const FlightsMap = ({ flights }) => {
                 <Marker position={arrivalPosition}>
                   <Popup>
                     <strong>Arrival Airport: {flight.arrival.airport}</strong><br />
-                    Scheduled: {flight.arrival.scheduled}<br />
-                    Estimated: {flight.arrival.estimated}<br />
-                    Actual: {flight.arrival.actual}
+                    Scheduled: {formatToCST(flight.arrival.scheduled)}<br />
+                    Estimated: {formatToCST(flight.arrival.estimated)}<br />
+                    Actual: {formatToCST(flight.arrival.actual)}
                   </Popup>
                   <Circle center={arrivalPosition} pathOptions={{ color: 'red' }} radius={10000} />
                 </Marker>
@@ -78,12 +96,11 @@ const FlightsMap = ({ flights }) => {
                     <strong>Flight Details:</strong><br />
                     <em>Departure:</em> {flight.departure.airport}<br />
                     <em>Arrival:</em> {flight.arrival.airport}<br />
-                    Scheduled Departure: {flight.departure.scheduled}<br />
-                    Estimated Departure: {flight.departure.estimated}<br />
-                    Actual Departure: {flight.departure.actual}<br />
-                    Scheduled Arrival: {flight.arrival.scheduled}<br />
-                    Estimated Arrival: {flight.arrival.estimated}<br />
-                    Actual Arrival: {flight.arrival.actual}
+                    Scheduled Departure: {formatToCST(flight.departure.scheduled)}<br />
+                    Estimated Departure: {formatToCST(flight.departure.estimated)}<br />
+                    Actual Departure: {formatToCST(flight.departure.actual)}<br />
+                    Scheduled Arrival: {formatToCST(flight.arrival.scheduled)}<br />
+                    Estimated Arrival: {formatToCST(flight.arrival.estimated)}<br />
                   </Popup>
                   <Circle center={livePosition} pathOptions={{ color: 'blue' }} radius={5000} />
                 </Marker>
