@@ -1,5 +1,9 @@
-//Rayyan Waris 
-//Use Case: View flight board to check the status of arrivals or departures at DFW Airport.
+// Rayyan Waris 
+// Use Case: View flight board to check the status of arrivals or departures at DFW Airport.
+
+// Test Case:
+// F15.1: View Flight Board - Verify if arrivals and departures are shown for DFW
+//        User views the website -> System shows correct flight board with accurate data.
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
