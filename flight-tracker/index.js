@@ -9,10 +9,10 @@ const PORT = process.env.PORT || 5001;
 // Enable CORS for frontend communication
 app.use(cors());
 
-// Hardcoded AviationStack API Key (ensure to move back to environment variable after fixing)
-const API_KEY = '9806658acd76f2bf3bebfac9d15d078d'; // Replace with your actual API key
+// AviationStack API Key (ensure to move back to environment variable)
+const API_KEY = '9806658acd76f2bf3bebfac9d15d078d';
 
-// Add logging to check the coordinates received from the API
+// Function to filter DFW flights
 function filterDFWFlights(flights) {
   return flights.filter(flight => {
     const dep_iata = flight.departure?.iata || '';
@@ -21,7 +21,7 @@ function filterDFWFlights(flights) {
     // Check if the flight is related to DFW
     const isDFW = dep_iata === 'DFW' || arr_iata === 'DFW';
     
-    // Log coordinates for debugging
+    // Log coordinates for debugging if related to DFW
     if (isDFW) {
       const depLat = flight.departure?.location?.lat || 'No Latitude';
       const depLon = flight.departure?.location?.lon || 'No Longitude';
@@ -37,7 +37,7 @@ function filterDFWFlights(flights) {
   });
 }
 
-
+// Function to format flight data consistently
 function formatFlightData(flight) {
   return {
     departure: {
@@ -67,12 +67,10 @@ function formatFlightData(flight) {
       speed: flight.live.speed_horizontal
     } : null,
     airline: flight.airline.name,
-    flightNumber: flight.flight.number
+    flightNumber: flight.flight.number,
+    status: flight.flight_status || 'Unknown'
   };
 }
-
-
-
 
 // Route to search flights by flight number
 app.get('/api/flights/number/:flightNumber', async (req, res) => {
@@ -121,6 +119,54 @@ app.get('/api/flights/date/:date', async (req, res) => {
   } catch (error) {
     console.error('Error fetching flight data by date:', error.message);
     res.status(500).json({ message: 'Error fetching flight data', details: error.message });
+  }
+});
+
+// Route to get arrivals to Dallas (DFW)
+app.get('/api/flights/arrivals', async (req, res) => {
+  try {
+    const response = await axios.get('http://api.aviationstack.com/v1/flights', {
+      params: {
+        access_key: API_KEY,
+        arr_iata: 'DFW',  // Fetch arrivals for Dallas-Fort Worth
+        limit: 20,        // Adjust limit as needed
+      },
+    });
+
+    const dfwFlights = filterDFWFlights(response.data.data).map(formatFlightData);
+
+    if (dfwFlights.length === 0) {
+      return res.status(404).json({ message: 'No arrivals related to DFW' });
+    }
+
+    res.json(dfwFlights);
+  } catch (error) {
+    console.error('Error fetching arrivals:', error.message);
+    res.status(500).json({ message: 'Error fetching arrivals', details: error.message });
+  }
+});
+
+// Route to get departures from Dallas (DFW)
+app.get('/api/flights/departures', async (req, res) => {
+  try {
+    const response = await axios.get('http://api.aviationstack.com/v1/flights', {
+      params: {
+        access_key: API_KEY,
+        dep_iata: 'DFW',  // Fetch departures for Dallas-Fort Worth
+        limit: 20,        // Adjust limit as needed
+      },
+    });
+
+    const dfwFlights = filterDFWFlights(response.data.data).map(formatFlightData);
+
+    if (dfwFlights.length === 0) {
+      return res.status(404).json({ message: 'No departures related to DFW' });
+    }
+
+    res.json(dfwFlights);
+  } catch (error) {
+    console.error('Error fetching departures:', error.message);
+    res.status(500).json({ message: 'Error fetching departures', details: error.message });
   }
 });
 

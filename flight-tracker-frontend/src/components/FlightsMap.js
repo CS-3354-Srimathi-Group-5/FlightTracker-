@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -28,15 +28,9 @@ const formatToCST = (time) => {
   });
 };
 
-
 const FlightsMap = ({ flights }) => {
   const mapCenter = [32.8998, -97.0403]; // DFW Airport coordinates
   const mapZoom = 7;
-
-  // Debugging: Log the flights data to ensure it's correct
-  useEffect(() => {
-    console.log('Flights data:', JSON.stringify(flights, null, 2));
-  }, [flights]);
 
   // Helper function to determine if a flight is live
   const isLiveFlight = (flight) => flight.live && isValidCoordinate(flight.live.latitude, flight.live.longitude);
@@ -86,6 +80,7 @@ const FlightsMap = ({ flights }) => {
                     <strong>Arrival Airport: {flight.arrival.airport}</strong><br />
                     Scheduled: {formatToCST(flight.arrival.scheduled)}<br />
                     Estimated: {formatToCST(flight.arrival.estimated)}<br />
+                    Actual: {formatToCST(flight.arrival.actual)}
                   </Popup>
                   <Circle center={arrivalPosition} pathOptions={{ color: 'red' }} radius={10000} />
                 </Marker>
