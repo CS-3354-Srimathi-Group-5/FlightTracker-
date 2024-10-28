@@ -1,151 +1,87 @@
-# Flight Tracker Application
+Flight Duration Calculation
+This Node.js calculates and displays the flight duration based on flight number. It fetches real-time flight data from the AviationStack API and provides users with information on the departure and arrival cities, flight duration, and flight status.
 
-This is a full-stack Flight Tracker application built with a Node.js backend and a React frontend. The application allows users to search for flights by flight number and get detailed flight information like departure city, arrival city, time departed, and current flight status.
-
-## Table of Contents
-
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Backend Setup](#backend-setup)
-- [Frontend Setup](#frontend-setup)
-- [Running the Application](#running-the-application)
-- [API Usage](#api-usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Project Structure
-
-```
-/project-root/
+Table of Contents
+Project Structure
+Prerequisites
+Setup Instructions
+Running the Application
+API Usage
+Error Handling
+License
+Project Structure
+go
+Copy code
+/FlightDurationApp/
 │
-├── flight-tracker/              // Backend directory (Node.js)
-│   ├── index.js
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── .env.local
-│   ├── .gitignore
-│   └── node_modules/
-│
-└── flight-tracker-frontend/     // Frontend directory (React)
-    ├── public/
-    │   ├── index.html
-    │   └── favicon.ico
-    │
-    ├── src/
-    │   ├── components/
-    │   │   └── FlightSearch.js
-    |   |   └── FlightsMap.js
-    │   ├── App.js
-    │   ├── index.js
-    │   └── styles/
-    │       └── App.css
-    │
-    ├── package.json
-    ├── package-lock.json
-    └── node_modules/
-```
-
-## Prerequisites
-
+├── .env.local                  // Environment variables file (holds API key)
+├── main.js                     // Main server file (Express setup and API route)
+├── package.json                // Project metadata and dependencies
+├── package-lock.json           // Lock file for dependencies
+└── node_modules/               // Installed Node.js packages
+Prerequisites
 Before you begin, make sure you have the following installed on your system:
 
-- **Node.js** (version 14 or higher)
-- **npm** (Node Package Manager, comes with Node.js)
-- An API Key from [AviationStack](https://aviationstack.com/) (needed to fetch flight data)
+Node.js (version 14 or higher)
+npm (Node Package Manager, comes with Node.js)
+An API Key from AviationStack (required to access flight data)
+Setup Instructions
+Clone the Repository (if not already done):
 
-## Backend Setup
+bash
+Copy code
+git clone https://github.com/YourUsername/FlightDurationApp.git
+cd FlightDurationApp
+Install Dependencies:
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/CS-3354-Srimathi-Group-5/FlightTracker-.git
-   cd flight-tracker/flight-tracker
-   ```
+bash
+Copy code
+npm install
+Set Up Environment Variables:
 
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
+Create a file named .env.local in the root directory (FlightDurationApp).
+Add the following line to .env.local:
+makefile
+Copy code
+AVIATION_STACK_API_KEY=your_actual_api_key_here
+Replace your_actual_api_key_here with your actual AviationStack API key.
+Run the Application:
 
-3. **Set Up Environment Variables**:
-   - Create a file named `.env.local` in the `flight-tracker` directory.
-   - Add the following content to `.env.local`:
-     
-     ```
-     AVIATION_STACK_API_KEY=your_actual_api_key_here
-     ```
+bash
+Copy code
+node main.js
+The backend server should now be running on http://localhost:5001.
 
-   - Replace `your_actual_api_key_here` with your actual AviationStack API key.
+Running the Application
+Once the server is running, you can access the flight duration feature by making a GET request to the following endpoint:
 
-4. **Run the Backend**:
-   ```bash
-   node index.js
-   ```
+URL: http://localhost:5001/flight-duration/:flightNumber
+Method: GET
+Parameter: flightNumber - The IATA code of the flight (e.g., AA100).
+API Usage
+Endpoint: /flight-duration/:flightNumber
+Description: Retrieves the duration and other details of the specified flight.
 
-   The backend server should now be running on `http://localhost:5001`.
+Example:
 
-## Frontend Setup
+bash
+Copy code
+GET http://localhost:5001/flight-duration/AA100
+Response:
 
-1. **Navigate to the Frontend Directory**:
-   ```bash
-   cd ../flight-tracker-frontend
-   ```
+json
+Copy code
+{
+  "departure_city": "New York John F. Kennedy International",
+  "arrival_city": "Los Angeles International",
+  "flight_duration": "Estimated flight duration (in-transit): 300 minutes"
+}
+Error Handling
+The application handles common errors, including:
 
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Run the Frontend**:
-   ```bash
-   npm start
-   ```
-
-   The React app should automatically open in your default browser at `http://localhost:3000`.
-
-## Running the Application
-
-- Ensure that both the backend and frontend servers are running:
-  - **Backend**: `http://localhost:5001`
-  - **Frontend**: `http://localhost:3000`
-- Use the search input on the React frontend to enter a flight number and press "Search" to get flight details.
-
-## API Usage
-
-### Backend API Endpoints
-
-- **GET `/flight/:flightNumber`**
-  - **Description**: Retrieves flight information for the given flight number.
-  - **Parameters**: 
-    - `flightNumber` (required): The IATA code of the flight.
-  - **Example**:
-    
-    ```
-    GET http://localhost:5001/flight/AA100
-    ```
-
-  - **Response**:
-
-    ```json
-    {
-      "departure_city": "New York John F. Kennedy International",
-      "arrival_city": "Los Angeles International",
-      "time_departed": "2024-10-23T14:30:00Z",
-      "time_landed": "N/A",
-      "is_in_air": true
-    }
-    ```
-
-## Contributing
-
-If you’d like to contribute to this project:
-
-1. Create a new branch (`git checkout -b feature/your-feature-name`).
-3. Commit your changes (`git commit -am 'Add some feature'`).
-4. Push to the branch (`git push origin feature/your-feature-name`).
-5. Create a new Pull Request.
-
-## License
-
+Flight not found: Returns a 404 status with a message if the flight number does not exist.
+Flight cancelled: Returns a 500 status with an error message if the flight status is "cancelled."
+Invalid departure/arrival time: Returns a 500 status if time data is missing or incorrect.
+Arrival time before departure: Returns a 500 status if the arrival time is earlier than the departure time, indicating an error.
+License
 This project is licensed under the MIT License.
-
----
