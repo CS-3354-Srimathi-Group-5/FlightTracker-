@@ -81,7 +81,7 @@ export default function Home()
               Welcome to AeroScope Website!
             </Typography>
             <Typography variant={'h6'} color={'#59788e'}>
-              DFW International Airport
+              Flight Tracker Application for DFW International Airport
             </Typography>
       </Stack>
 
