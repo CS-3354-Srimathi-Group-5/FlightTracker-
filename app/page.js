@@ -72,8 +72,11 @@ export default function Home()
     spacing={3}>
       <Stack direction="column" spacing={1} alignItems={'center'}>
           {/* <Image src="/AeroScopeLogo.png" alt="Description of Image" height={'100'} width={'100'} /> */}
-            <Typography variant={'h3'} color={'#0033ff'} padding={1}>
-              Welcome to AeroScope website!
+            <Typography variant={'h4'} color={'#0033ff'} padding={1}>
+              Welcome to AeroScope Website!
+            </Typography>
+            <Typography variant={'h6'} color={'#59788e'}>
+              DFW International Airport
             </Typography>
       </Stack>
 
@@ -98,7 +101,7 @@ export default function Home()
             <Button variant = "contained" href="/" color="warning">Souvieners</Button>
         </Stack>
       </Stack>
-      <Typography variant={'h5'} color={'#0033ff'} textAlign={'center'} padding={4} sx={{ fontStyle: 'italic' }}>
+      <Typography variant={'h5'} color={'#0033ff'} textAlign={'center'} padding={1} sx={{ fontStyle: 'italic' }}>
           Thank you for visiting! For more info go to: <a href="https://www.dfwairport.com/">dfwairport.com</a>
       </Typography>
     </Stack>

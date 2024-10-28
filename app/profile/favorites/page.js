@@ -1,5 +1,6 @@
-// AeroScope user profile Page 
+// AeroScope user favorites Page 
 // Ashraful Islam
+// external databse storage comming soon
 
 'use client'
 import Image from "next/image";

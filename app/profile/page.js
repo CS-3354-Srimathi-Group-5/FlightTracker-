@@ -1,5 +1,6 @@
 // AeroScope user profile Page 
 // Ashraful Islam
+// external login comming soon for live users
 
 'use client'
 import Image from "next/image";
