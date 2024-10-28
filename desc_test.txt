@@ -16,5 +16,22 @@ c) Talk about resources needed, skills, methods, configuration management tool, 
 relationship between them - if there are any association classes, those also need to be captured with their
 attributes & methods (you can use draw.io or lucidchart or visio or something similar). - in .pdf form
 
+Class home-page:
+- Image and MUI libraires
+-------------------------
+- Back()
+- Home()
+- Map()
+- Profile()
+
+Class save-favorites:
+- Image and MUI libraires
+- flight info: plane name, start location, start time, end location, end time, duration
+---------------------------------------------------------------------------------------
+- Save()
+- Delete()
+
+
+
 o Compare them with UML classes and associations you did in phase2.
 o implement & test them based on your test cases; it is ok if your code does not pass all test cases.
