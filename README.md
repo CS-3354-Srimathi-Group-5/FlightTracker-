@@ -85,7 +85,7 @@ GET http://localhost:5001/flight-duration/flightNumber
 {
   "departure_city": "New York John F. Kennedy International",
   "arrival_city": "Los Angeles International",
-  "flight_duration": "Estimated flight duration (in-transit): 300 minutes"
+  "flight_duration": "Estimated flight duration (in-transit) is 300 minutes"
 }
 
 **Error Handling**
