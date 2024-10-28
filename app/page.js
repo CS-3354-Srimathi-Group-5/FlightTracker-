@@ -95,7 +95,7 @@ export default function Home()
         </Stack>
         <Stack direction="column" spacing={5} alignItems={'center'} width="50%">
             <h2>Transporation</h2>
-            <Button variant = "contained" href="/" sx={{backgroundColor: "blue"}}>Parking Lots</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/park/" sx={{backgroundColor: "blue"}}>Parking Lots</Button>
             <Button variant = "contained" href="/">Car Rental</Button>
             <Button variant = "contained" href="/">Shuttle Service</Button>
         </Stack>
