@@ -66,11 +66,14 @@ The backend server should now be running on http://localhost:5001.
 Once the server is running, you can access the flight duration feature by making a GET request to the following endpoint:
 
 URL: http://localhost:5001/flight-duration/:flightNumber
+
 Method: GET
+
 Parameter: flightNumber - The IATA code of the flight (e.g., AA100).
 API Usage
 
 Endpoint: /flight-duration/:flightNumber
+
 Description: Retrieves the duration and other details of the specified flight.
 
 Example:
@@ -90,8 +93,11 @@ GET http://localhost:5001/flight-duration/flightNumber
 The application handles common errors, including:
 
 Flight not found: Returns a 404 status with a message if the flight number does not exist.
+
 Flight cancelled: Returns a 500 status with an error message if the flight status is "cancelled."
+
 Invalid departure/arrival time: Returns a 500 status if time data is missing or incorrect.
+
 Arrival time before departure: Returns a 500 status if the arrival time is earlier than the departure time, indicating an error.
 
 **License**
