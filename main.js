@@ -1,4 +1,4 @@
-// Load environment variables
+// Loading environment variables
 require('dotenv').config({ path: '.env.local' });
 const express = require('express');
 const axios = require('axios');
@@ -8,7 +8,9 @@ const cors = require('cors');
 const app = express();
 const PORT = 5001;
 app.use(cors());
-const API_KEY = process.env.AVIATION_STACK_API_KEY;
+
+//API for fetching the data
+const API_KEY = process.env.AVIATION_STACK_API_KEY; 
 
 // Route to get flight duration by flight number
 app.get('/flight-duration/:flightNumber', async (req, res) => {
@@ -27,37 +29,39 @@ app.get('/flight-duration/:flightNumber', async (req, res) => {
     if (flightData) {
       console.log(flightData);
 
-      // Check if flight status is 'cancelled' to skip calculation
+      // Skipping calculation if flight status is 'cancelled'
       if (flightData.flight_status === 'cancelled') {
         return res.status(500).json({ error: 'Flight is cancelled. Duration unavailable.' });
       }
 
-      // Use actual times if available; otherwise, fall back to estimated or scheduled times
+      // Calculating considering the actual times if available; count to estimated or scheduled times if not
       const timeDeparted = new Date(flightData.departure.actual || flightData.departure.estimated || flightData.departure.scheduled);
       const timeLanded = new Date(flightData.arrival.actual || flightData.arrival.estimated || flightData.arrival.scheduled);
 
-      // Ensure both times are valid dates
+      // Validation check of the dates fetched from the API
       if (isNaN(timeDeparted) || isNaN(timeLanded)) {
         return res.status(500).json({ error: 'Invalid departure or arrival time.' });
       }
 
-      const duration = (timeLanded - timeDeparted) / (1000 * 60); // Duration in minutes
+      //Calculating the duration of the flight in minutes
+      const duration = (timeLanded - timeDeparted) / (1000 * 60); 
 
-      // Handle cases where arrival time is before departure time
+      // Printing a statement where arrival time is before departure time
       if (duration < 0) {
         return res.status(500).json({ error: 'Arrival time is before departure time.' });
       }
 
-      // Customize duration message based on flight status
+      // Displaying duration message based on flight status
       let durationMessage;
       if (flightData.flight_status === 'scheduled') {
-        durationMessage = `Scheduled flight duration: ${duration} minutes`;
+        durationMessage = `Scheduled flight duration is ${duration} minutes`;
       } else if (flightData.flight_status === 'en-route') {
-        durationMessage = `Estimated flight duration (in-transit): ${duration} minutes`;
+        durationMessage = `Estimated flight duration (in-transit) is ${duration} minutes`;
       } else {
-        durationMessage = `Actual flight duration: ${duration} minutes`;
+        durationMessage = `Actual flight duration is ${duration} minutes`;
       }
 
+      //Validation check of the flight number
       const flightInfo = {
         departure_city: flightData.departure.airport || 'Unknown',
         arrival_city: flightData.arrival.airport || 'Unknown',
@@ -66,7 +70,7 @@ app.get('/flight-duration/:flightNumber', async (req, res) => {
 
       res.json(flightInfo);
     } else {
-      res.status(404).json({ message: 'Flight not found' });
+      res.status(404).json({ message: 'Flight not found' });  //if the flight number is not available
     }
   } catch (error) {
     console.error(error);
@@ -74,7 +78,7 @@ app.get('/flight-duration/:flightNumber', async (req, res) => {
   }
 });
 
-// Start the server
+// Starting the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
