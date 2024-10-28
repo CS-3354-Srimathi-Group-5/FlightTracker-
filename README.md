@@ -1,7 +1,8 @@
-Flight Duration Calculation
+**Flight Duration Calculation**
+
 This Node.js calculates and displays the flight duration based on flight number. It fetches real-time flight data from the AviationStack API and provides users with information on the departure and arrival cities, flight duration, and flight status.
 
-Table of Contents
+**Table of Contents**
 Project Structure
 Prerequisites
 Setup Instructions
@@ -11,17 +12,24 @@ Error Handling
 License
 
 
-Project Structure
+**Project Structure**
+
 
 /FlightDurationApp/
-│
-├── .env.local                  // Environment variables file (holds API key)
-├── main.js                     // Main server file (Express setup and API route)
-├── package.json                // Project metadata and dependencies
-├── package-lock.json           // Lock file for dependencies
-└── node_modules/               // Installed Node.js packages
+       
+       │
+       
+       ├── .env.local                  // Environment variables file (holds API key)
+       
+       ├── main.js                     // Main server file (Express setup and API route)
+       
+       ├── package.json                // Project metadata and dependencies
+       
+       ├── package-lock.json           // Lock file for dependencies
+       
+       └── node_modules/               // Installed Node.js packages
 
-Prerequisites
+**Prerequisites**
 Before you begin, make sure you have the following installed on your system:
 
 Node.js (version 14 or higher)
@@ -31,10 +39,11 @@ Setup Instructions
 Clone the Repository (if not already done):
 
 
-git clone https://github.com/YourUsername/FlightDurationApp.git
-cd FlightDurationApp
-Install Dependencies:
+git clone https://github.com/CS-3354-Srimathi-Group-5/FlightTracker-.git
 
+cd FlightDurationApp
+
+**Install Dependencies:**
 
 npm install
 
@@ -42,19 +51,18 @@ Set Up Environment Variables:
 
 Create a file named .env.local in the root directory (FlightDurationApp).
 
-Add the following line to .env.local:
+**Add the following line to .env.local:**
 
 
 AVIATION_STACK_API_KEY=your_actual_api_key_here
 Replace your_actual_api_key_here with your actual AviationStack API key.
 
-Run the Application:
-
+**Run the Application:**
 
 node main.js
 The backend server should now be running on http://localhost:5001.
 
-Running the Application
+**Running the Application**
 Once the server is running, you can access the flight duration feature by making a GET request to the following endpoint:
 
 URL: http://localhost:5001/flight-duration/:flightNumber
@@ -69,15 +77,15 @@ Example:
 
 GET http://localhost:5001/flight-duration/AA100
 
-Response:
-
+**Response:**
 
 {
   "departure_city": "New York John F. Kennedy International",
   "arrival_city": "Los Angeles International",
   "flight_duration": "Estimated flight duration (in-transit): 300 minutes"
 }
-Error Handling
+
+**Error Handling**
 
 The application handles common errors, including:
 
@@ -86,5 +94,5 @@ Flight cancelled: Returns a 500 status with an error message if the flight statu
 Invalid departure/arrival time: Returns a 500 status if time data is missing or incorrect.
 Arrival time before departure: Returns a 500 status if the arrival time is earlier than the departure time, indicating an error.
 
-License
+**License**
 This project is licensed under the MIT License.
