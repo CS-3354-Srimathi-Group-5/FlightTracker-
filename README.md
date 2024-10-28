@@ -75,7 +75,7 @@ Description: Retrieves the duration and other details of the specified flight.
 
 Example:
 
-GET http://localhost:5001/flight-duration/AA100
+GET http://localhost:5001/flight-duration/flightNumber
 
 **Response:**
 
