@@ -3,8 +3,8 @@ AeroScope Home Page
 by Ashraful Islam
 
 test cases by Ashraful:
- - home page to display DFW airport information
- - saving + display favorite flights
+ - F9.1: home page to display DFW airport information
+ - F11.1: saving + display favorite flights
 
 App tool bar has 4 functions: back, map, home, profile
  - back goes back to the page/level user came from
