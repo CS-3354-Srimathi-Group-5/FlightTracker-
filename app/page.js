@@ -101,8 +101,8 @@ export default function Home()
             <Button variant = "contained" href="/" color="warning">Souvieners</Button>
         </Stack>
       </Stack>
-      <Typography variant={'h5'} color={'#0033ff'} textAlign={'center'} padding={1} sx={{ fontStyle: 'italic' }}>
-          Thank you for visiting! For more info go to: <a href="https://www.dfwairport.com/">dfwairport.com</a>
+      <Typography variant={'h6'} color={'#0033ff'} textAlign={'center'} padding={2} sx={{ fontStyle: 'italic' }}>
+          Thank you for visiting! For more information, please go to: <a href="https://www.dfwairport.com/">dfwairport.com</a>
       </Typography>
     </Stack>
   </Box>
