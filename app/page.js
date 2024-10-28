@@ -2,17 +2,22 @@
 AeroScope Home Page 
 by Ashraful Islam
 
+test cases by Ashraful:
+ - home page to display DFW airport information
+ - saving + display favorite flights
+
 App tool bar has 4 functions: back, map, home, profile
-- back goes back to the page/level user came from
-- map shows the terminal map view of the airport
-- home goes to the home page of the app
-- profile shows the user's profile
---- update info
---- settings
---- favorites
------ save new flight
------ delete saved flight
---- delete account
+ - back goes back to the page/level user came from
+ - map shows the terminal map view of the airport
+ - home goes to the home page of the app
+ - profile shows the user's profile
+  - update info
+  - settings
+  - favorites
+     - save new flight
+     - delete saved flight
+  - delete account
+
 --------------------------------------------------------------------------------- */
 
 'use client'
