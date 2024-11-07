@@ -89,7 +89,7 @@ export default function Home()
       <Stack direction="row" alignItems={'center'} spacing={5}>
         <Stack direction="column" spacing={5} alignItems={'center'} width="50%">
             <h2>Flight Info</h2>
-            <Button variant = "contained" href="/" sx={{backgroundColor: "#02840f"}}>Current Flights</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/flights/" sx={{backgroundColor: "#02840f"}}>Current Flights</Button>
             <Button variant = "contained" href="/" color="success">Globe View</Button>
             <Button variant = "contained" href="/" color="success">Customs Info</Button>
         </Stack>
