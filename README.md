@@ -39,7 +39,7 @@ Setup Instructions
 Clone the Repository (if not already done):
 
 
-git clone https://github.com/CS-3354-Srimathi-Group-5/FlightTracker-.git
+git clone [https://github.com/CS-3354-Srimathi-Group-5/FlightTracker-/tree/Flight-Duration-Calculation]
 
 cd FlightDurationApp
 
