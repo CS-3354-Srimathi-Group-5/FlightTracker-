@@ -3,7 +3,9 @@
 
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
+import FlightPath from './FlightPath'; // Import the FlightPath component
 import 'leaflet/dist/leaflet.css';
+
 // Bukunmi, Ashraful, and Jahnavi worked on this part
 // Test Cases:
 // F16.1: Flight Radar - Verify radar view for real-time flight positions
@@ -106,11 +108,12 @@ const FlightsMap = ({ flights }) => {
                     Scheduled Arrival: {formatToCST(flight.arrival.scheduled)}<br />
                     Estimated Arrival: {formatToCST(flight.arrival.estimated)}<br />
                     Total Duration: {flight.duration}
-
                   </Popup>
                   <Circle center={livePosition} pathOptions={{ color: 'blue' }} radius={5000} />
                 </Marker>
               )}
+             {/* Add the flight path only for live flights */}
+             {livePosition && <FlightPath flight={flight} />}
             </React.Fragment>
           );
         })}
