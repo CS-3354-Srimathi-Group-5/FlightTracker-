@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
-import FlightSearch from './components/FlightSearch';
-import FlightsMap from './components/FlightsMap';
-import FlightBoard from './components/FlightBoard'; // Assuming you still have FlightBoard
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import FlightBoard from './components/FlightBoard';
+import FlightSearchMap from './components/FlightSearchMap';
 
 const App = () => {
-  const [flights, setFlights] = useState([]); // State to hold the search results
-
-  // Function to update flights data based on search results
-  const handleFlightsUpdate = (newFlights) => {
-    setFlights(newFlights);
-  };
-
   return (
-    <div>
-      <h1>DFW Flight Tracker</h1>
-      {/* Optional: Static Flight Board Component */}
-      <FlightBoard />
+    <Router>
+      <div>
+        <nav>
+          <Link to="/">Home</Link>
+        </nav>
 
-      {/* Flight Search Component */}
-      <FlightSearch onFlightsUpdate={handleFlightsUpdate} />
-
-      {/* Flight Map Component, passing the flights state */}
-      <FlightsMap flights={flights} />
-    </div>
+        <Routes>
+          {/* Homepage route */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/flightsearchmap" element={<FlightSearchMap />} />
+          <Route path="/flightboard" element={<FlightBoard />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
