@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 
 // AviationStack API Key (ensure to move back to environment variable)
-const API_KEY = process.env.AVIATION_STACK_API_KEY || '9806658acd76f2bf3bebfac9d15d078d';
+const API_KEY = 'YOUR_API_KEY';
 
 // Function to filter DFW flights
 function filterDFWFlights(flights) {
