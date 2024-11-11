@@ -8,6 +8,7 @@ import Image from "next/image";
 // import Link from 'next/link';
 // import { useRouter } from 'next/router';
 import {Box, Stack, TextField, Button, Typography, Container, AppBar, Toolbar, Grid } from '@mui/material'
+import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
 // import {useState, useRef, useEffect} from 'react'
 // import styles from "./page.module.css";
 
@@ -33,7 +34,15 @@ export default function Home()
         <Image src="/AeroScopeLogoV2.png" alt="Description of Image" height={'150'} width={'150'} />
         <Typography variant="h4" style={{ flexGrow: 1 }} textAlign={'center'} padding={0} color={"white"}> </Typography>
         <Button color="inherit" href="/"> <Image src="/home.png" alt="Description of Image" height={'40'} width={'40'} />  </Button>
-        <Button color="inherit" href="/profile"> <Image src="/pfp.png" alt="Description of Image" height={'50'} width={'50'} />  </Button>
+          <SignedOut>
+            <Stack flexDirection={"column"}>
+              <Button sx={{color: "#000"}} href="/login">{' '}Login</Button>
+              <Button sx={{color: "#000"}} href="/sign-up">{' '}Sign Up</Button>
+            </Stack>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
       </Toolbar>
     </AppBar>
 
@@ -53,9 +62,9 @@ export default function Home()
       flexGrow={1}
       overflow="auto"
       maxHeight="10%">
-        {
-          <h1>My Profile</h1>
-        }
+      {
+        <Typography variant="h4" style={{ flexGrow: 1 }} textAlign={'left'} padding={0} color={"black"}> My Profile</Typography>
+      }
       </Stack>
       <Stack direction="column" spacing={2} height="70%">
           <h3>Name: Ashraful Islam</h3>

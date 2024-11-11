@@ -18,6 +18,7 @@ App tool bar has 4 functions: back, map, home, profile
      - delete saved flight
   - delete account
 
+  Please see README.md to run code
 --------------------------------------------------------------------------------- */
 
 'use client'
@@ -28,7 +29,7 @@ App tool bar has 4 functions: back, map, home, profile
 // import styles from "./page.module.css";
 import Image from "next/image";
 import {Box, Stack, TextField, Button, Typography, Container, AppBar, Toolbar, Grid } from '@mui/material'
-// import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
+import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
 
 export default function Home() 
 {
@@ -79,10 +80,10 @@ export default function Home()
       <Stack direction="column" spacing={1} alignItems={'center'}>
           {/* <Image src="/AeroScopeLogo.png" alt="Description of Image" height={'100'} width={'100'} /> */}
             <Typography variant={'h4'} color={'#0033ff'} padding={1}>
-              Welcome to AeroScope Website!
+              Welcome to AeroScope!
             </Typography>
-            <Typography variant={'h6'} color={'#59788e'}>
-              Flight Tracker Application for DFW International Airport
+            <Typography variant={'h6'} color={'#59788e'} sx={{ fontStyle: 'italic' }}>
+              Flight Tracker Application & Guide to DFW International Airport
             </Typography>
       </Stack>
 
@@ -90,25 +91,25 @@ export default function Home()
       <Stack direction="row" alignItems={'center'} spacing={5}>
         <Stack direction="column" spacing={5} alignItems={'center'} width="50%">
             <h2>Flight Info</h2>
-            <Button variant = "contained" href="https://www.dfwairport.com/flights/" sx={{backgroundColor: "#02840f"}}>Current Flights</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/flights/" target="_blank" sx={{backgroundColor: "#02840f"}}>Current Flights</Button>
             <Button variant = "contained" href="/" color="success">Globe View</Button>
-            <Button variant = "contained" href="/" color="success">Customs Info</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/explore/plan/customs/" target="_blank" color="success">Customs Info</Button>
         </Stack>
         <Stack direction="column" spacing={5} alignItems={'center'} width="50%">
             <h2>Transporation</h2>
-            <Button variant = "contained" href="https://www.dfwairport.com/park/" sx={{backgroundColor: "blue"}}>Parking Lots</Button>
-            <Button variant = "contained" href="/">Car Rental</Button>
-            <Button variant = "contained" href="/">Shuttle Service</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/park/" target="_blank" sx={{backgroundColor: "blue"}}>Parking Lots</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/explore/transportation/rentalcars/" target="_blank">Car Rental</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/shuttles/" target="_blank">Shuttle Service</Button>
         </Stack>
         <Stack direction="column" spacing={5} alignItems={'center'} width="50%">
             <h2>Shop DFW Airport</h2>
-            <Button variant = "contained" href="/" sx={{backgroundColor: "#cc5500"}}>Resturants</Button>
-            <Button variant = "contained" href="/" color="warning">Air Hotel</Button>
-            <Button variant = "contained" href="/" color="warning">Souvieners</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/shop-dine-services/" target="_blank" sx={{backgroundColor: "#cc5500"}}>Resturants</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/business/opportunities/commercial-development/on-airport-hotels/" target="_blank" color="warning">Hotels</Button>
+            <Button variant = "contained" href="https://www.dfwairport.com/shop-dine-services/" target="_blank" color="warning">Souvieners</Button>
         </Stack>
       </Stack>
-      <Typography variant={'h6'} color={'#0033ff'} textAlign={'center'} padding={2} sx={{ fontStyle: 'italic' }}>
-          Thank you for visiting! For more information, please go to: <a href="https://www.dfwairport.com/">dfwairport.com</a>
+      <Typography variant={'h6'} color={'#003359'} textAlign={'center'} padding={2} sx={{ fontStyle: 'italic' }}>
+          Thank you for visiting! For more information, please go to: <a href="https://www.dfwairport.com/" target="_blank">dfwairport.com</a>. Website developed by Team 5
       </Typography>
     </Stack>
   </Box>
