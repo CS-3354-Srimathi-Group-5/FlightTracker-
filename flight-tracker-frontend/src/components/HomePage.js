@@ -66,9 +66,6 @@ export default function HomePage() {
                         <Button variant="contained" href="/flightboard" sx={{ backgroundColor: "#02840f" }}>
                             Flight Board
                         </Button>
-                        <Button variant="contained" href="/" sx={{ backgroundColor: "#02840f" }}>
-                            Customs Info
-                        </Button>
                     </Stack>
 
                     {/* Transportation Section */}
@@ -77,10 +74,10 @@ export default function HomePage() {
                         <Button variant="contained" href="https://www.dfwairport.com/park/" sx={{ backgroundColor: "blue" }}>
                             Parking Lots
                         </Button>
-                        <Button variant="contained" href="/" sx={{ backgroundColor: "blue" }}>
+                        <Button variant="contained" href="https://www.avis.com/en/reservation#/vehicles" sx={{ backgroundColor: "blue" }}>
                             Car Rental
                         </Button>
-                        <Button variant="contained" href="/" sx={{ backgroundColor: "blue" }}>
+                        <Button variant="contained" href="https://www.dfwairport.com/shuttles/" sx={{ backgroundColor: "blue" }}>
                             Shuttle Service
                         </Button>
                     </Stack>
@@ -88,14 +85,11 @@ export default function HomePage() {
                     {/* Shopping Section */}
                     <Stack direction="column" spacing={3} alignItems="center" width="30%">
                         <Typography variant="h5">Shop at DFW</Typography>
-                        <Button variant="contained" href="/" sx={{ backgroundColor: "#cc5500" }}>
+                        <Button variant="contained" href="https://www.dfwairport.com/shop-dine-services/" sx={{ backgroundColor: "#cc5500" }}>
                             Restaurants
                         </Button>
-                        <Button variant="contained" href="/" sx={{ backgroundColor: "#cc5500" }}>
+                        <Button variant="contained" href="https://sites.dfwairport.com/landhere/developmentplan/hospitality/index.php" sx={{ backgroundColor: "#cc5500" }}>
                             Air Hotel
-                        </Button>
-                        <Button variant="contained" href="/" sx={{ backgroundColor: "#cc5500" }}>
-                            Souvenirs
                         </Button>
                     </Stack>
                 </Stack>
