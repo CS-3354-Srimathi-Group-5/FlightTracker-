@@ -21,13 +21,14 @@ App tool bar has 4 functions: back, map, home, profile
 --------------------------------------------------------------------------------- */
 
 'use client'
-import Image from "next/image";
 // import Router from 'next/router';
 // import Link from 'next/link';
 // import { useRouter } from 'next/router';
-import {Box, Stack, TextField, Button, Typography, Container, AppBar, Toolbar, Grid } from '@mui/material'
 // import {useState, useRef, useEffect} from 'react'
 // import styles from "./page.module.css";
+import Image from "next/image";
+import {Box, Stack, TextField, Button, Typography, Container, AppBar, Toolbar, Grid } from '@mui/material'
+// import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
 
 export default function Home() 
 {
