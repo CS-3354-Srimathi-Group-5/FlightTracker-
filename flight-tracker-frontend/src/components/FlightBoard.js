@@ -1,5 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  Button,
+  Select,
+  MenuItem,
+  Box,
+  CircularProgress,
+  Paper,
+  Pagination,
+} from '@mui/material';
 
 const FlightBoard = () => {
   const [arrivals, setArrivals] = useState([]);
@@ -10,7 +26,7 @@ const FlightBoard = () => {
   // Pagination state
   const [arrivalPage, setArrivalPage] = useState(1);
   const [departurePage, setDeparturePage] = useState(1);
-  const pageSize = 10; // Number of flights per page
+  const pageSize = 10;
 
   // Sorting preferences
   const [arrivalSort, setArrivalSort] = useState('time');
@@ -27,7 +43,7 @@ const FlightBoard = () => {
       hour12: true,
       month: 'numeric',
       day: 'numeric',
-      year: 'numeric'
+      year: 'numeric',
     });
   };
 
@@ -58,7 +74,6 @@ const FlightBoard = () => {
     return sortedFlights;
   };
 
-  // Get paginated data for arrivals and departures
   const getPaginatedData = (data, page, sort) => {
     const sortedData = sortFlights(data, sort);
     const startIndex = (page - 1) * pageSize;
@@ -68,110 +83,94 @@ const FlightBoard = () => {
   const paginatedArrivals = getPaginatedData(arrivals, arrivalPage, arrivalSort);
   const paginatedDepartures = getPaginatedData(departures, departurePage, departureSort);
 
-  // Pagination controls
-  const handleNextPage = (type) => {
-    if (type === 'arrival' && arrivalPage * pageSize < arrivals.length) {
-      setArrivalPage((prev) => prev + 1);
-    } else if (type === 'departure' && departurePage * pageSize < departures.length) {
-      setDeparturePage((prev) => prev + 1);
-    }
-  };
+  if (loading) return <CircularProgress />;
+  if (error) return <Typography color="error">{error}</Typography>;
 
-  const handlePreviousPage = (type) => {
-    if (type === 'arrival' && arrivalPage > 1) {
-      setArrivalPage((prev) => prev - 1);
-    } else if (type === 'departure' && departurePage > 1) {
-      setDeparturePage((prev) => prev - 1);
-    }
-  };
-
-  if (loading) return <div>Loading flight data...</div>;
-  if (error) return <div>{error}</div>;
+  const renderFlightsTable = (flights, type) => (
+    <TableContainer component={Paper} elevation={3}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Flight</TableCell>
+            <TableCell>Airline</TableCell>
+            <TableCell>{type === 'arrival' ? 'From' : 'To'}</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>{type === 'arrival' ? 'Scheduled Arrival' : 'Scheduled Departure'}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {flights.map((flight, index) => (
+            <TableRow key={index}>
+              <TableCell>{flight.flightNumber}</TableCell>
+              <TableCell>{flight.airline}</TableCell>
+              <TableCell>
+                {type === 'arrival' ? flight.departure.iata : flight.arrival.iata}
+              </TableCell>
+              <TableCell>{flight.status}</TableCell>
+              <TableCell>
+                {type === 'arrival'
+                  ? formatTimeToCentral(flight.arrival.scheduled)
+                  : formatTimeToCentral(flight.departure.scheduled)}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 
   return (
-    <div>
-      <h1>Flight Board - Dallas (DFW)</h1>
+    <Box sx={{ padding: 4 }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        Flight Board - Dallas (DFW)
+      </Typography>
 
-      {/* Arrivals Section with Pagination */}
-      <div>
-        <h2>Arrivals</h2>
-        <label>
-          Sort by: 
-          <select value={arrivalSort} onChange={(e) => setArrivalSort(e.target.value)}>
-            <option value="time">Most Recent</option>
-            <option value="airline">Airline</option>
-          </select>
-        </label>
-        <table>
-          <thead>
-            <tr>
-              <th>Flight</th>
-              <th>Airline</th>
-              <th>From</th>
-              <th>Status</th>
-              <th>Scheduled Arrival</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedArrivals.map((flight, index) => (
-              <tr key={index}>
-                <td>{flight.flightNumber}</td>
-                <td>{flight.airline}</td>
-                <td>{flight.departure.iata}</td>
-                <td>{flight.status}</td>
-                <td>{formatTimeToCentral(flight.arrival.scheduled)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <button onClick={() => handlePreviousPage('arrival')} disabled={arrivalPage === 1}>
-          Previous
-        </button>
-        <button onClick={() => handleNextPage('arrival')} disabled={arrivalPage * pageSize >= arrivals.length}>
-          Next
-        </button>
-      </div>
-      
-      {/* Departures Section with Pagination */}
-      <div>
-        <h2>Departures</h2>
-        <label>
-          Sort by: 
-          <select value={departureSort} onChange={(e) => setDepartureSort(e.target.value)}>
-            <option value="time">Most Recent</option>
-            <option value="airline">Airline</option>
-          </select>
-        </label>
-        <table>
-          <thead>
-            <tr>
-              <th>Flight</th>
-              <th>Airline</th>
-              <th>To</th>
-              <th>Status</th>
-              <th>Scheduled Departure</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedDepartures.map((flight, index) => (
-              <tr key={index}>
-                <td>{flight.flightNumber}</td>
-                <td>{flight.airline}</td>
-                <td>{flight.arrival.iata}</td>
-                <td>{flight.status}</td>
-                <td>{formatTimeToCentral(flight.departure.scheduled)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <button onClick={() => handlePreviousPage('departure')} disabled={departurePage === 1}>
-          Previous
-        </button>
-        <button onClick={() => handleNextPage('departure')} disabled={departurePage * pageSize >= departures.length}>
-          Next
-        </button>
-      </div>
-    </div>
+      {/* Arrivals Section */}
+      <Box sx={{ marginBottom: 4 }}>
+        <Typography variant="h5">Arrivals</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <Typography>Sort by: </Typography>
+          <Select
+            value={arrivalSort}
+            onChange={(e) => setArrivalSort(e.target.value)}
+            sx={{ marginLeft: 2 }}
+          >
+            <MenuItem value="time">Most Recent</MenuItem>
+            <MenuItem value="airline">Airline</MenuItem>
+          </Select>
+        </Box>
+        {renderFlightsTable(paginatedArrivals, 'arrival')}
+        <Pagination
+          count={Math.ceil(arrivals.length / pageSize)}
+          page={arrivalPage}
+          onChange={(e, value) => setArrivalPage(value)}
+          sx={{ marginTop: 2 }}
+        />
+      </Box>
+
+      {/* Departures Section */}
+      <Box>
+        <Typography variant="h5">Departures</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <Typography>Sort by: </Typography>
+          <Select
+            value={departureSort}
+            onChange={(e) => setDepartureSort(e.target.value)}
+            sx={{ marginLeft: 2 }}
+          >
+            <MenuItem value="time">Most Recent</MenuItem>
+            <MenuItem value="airline">Airline</MenuItem>
+          </Select>
+        </Box>
+        {renderFlightsTable(paginatedDepartures, 'departure')}
+        <Pagination
+          count={Math.ceil(departures.length / pageSize)}
+          page={departurePage}
+          onChange={(e, value) => setDeparturePage(value)}
+          sx={{ marginTop: 2 }}
+        />
+      </Box>
+    </Box>
   );
 };
 
