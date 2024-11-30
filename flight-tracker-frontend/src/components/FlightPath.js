@@ -12,9 +12,9 @@ const AIRPORT_COORDINATES = {
     "Los Angeles International": [33.9416, -118.4085],  // Los Angeles International
     "ORD": [41.9742, -87.9073],  // Chicago O'Hare International
     "ATL": [33.6407, -84.4277],  // Hartsfield-Jackson Atlanta International
-    "JFK": [40.6413, -73.7781],  // John F. Kennedy International
+    "John F. Kennedy International": [40.6413, -73.7781],  // John F. Kennedy International
     "DEN": [39.8561, -104.6737],  // Denver International
-    "SFO": [37.6213, -122.3790],  // San Francisco International
+    "San Francisco International": [37.6213, -122.3790],  // San Francisco International
     "CLT": [35.2144, -80.9473],  // Charlotte Douglas International
     "LAS": [36.0840, -115.1537],  // Las Vegas Harry Reid International
     "PHX": [33.4352, -112.0101],  // Phoenix Sky Harbor International
@@ -22,10 +22,10 @@ const AIRPORT_COORDINATES = {
     "MIA": [25.7932, -80.2906],  // Miami International
     "MCO": [28.4312, -81.3081],  // Orlando International
     "SEA": [47.4502, -122.3088],  // Seattle-Tacoma International
-    "EWR": [40.6895, -74.1745],  // Newark Liberty International
+    "Newark Liberty International": [40.6895, -74.1745],  // Newark Liberty International
     "MSP": [44.8848, -93.2223],  // Minneapolis-Saint Paul International
     "DTW": [42.2162, -83.3554],  // Detroit Metropolitan Wayne County
-    "BOS": [42.3656, -71.0096],  // Boston Logan International
+    "Logan International": [42.3656, -71.0096],  // Boston Logan International
     "PHL": [39.8729, -75.2437],  // Philadelphia International
     "LGA": [40.7769, -73.8740],  // LaGuardia Airport
     "FLL": [26.0742, -80.1506],  // Fort Lauderdale–Hollywood International
