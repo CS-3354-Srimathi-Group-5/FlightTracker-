@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import backgroundGif from '../assets/plane.gif';
 import axios from 'axios';
 import {
   Table,
@@ -120,7 +121,29 @@ const FlightBoard = () => {
   );
 
   return (
-    <Box sx={{ padding: 4 }}>
+    <Box sx={{
+        position: 'relative',
+        padding: 4,
+        backgroundImage: `url(${backgroundGif})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          backgroundColor: 'rgba(255, 255, 255, 0.8)', // 80% opaque white overlay
+          zIndex: 1,
+        },
+        '& > *': {
+          position: 'relative',
+          zIndex: 2, // Ensure content is above the overlay
+        },
+      }}
+    >
       <Typography variant="h4" align="center" gutterBottom>
         Flight Board - Dallas (DFW)
       </Typography>

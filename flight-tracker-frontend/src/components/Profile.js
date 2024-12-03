@@ -6,9 +6,11 @@
 // import Router from 'next/router';
 // import Link from 'next/link';
 // import { useRouter } from 'next/router';
-import {Box, Stack, TextField, Button, Typography, Container, AppBar, Toolbar, Grid } from '@mui/material'
 // import {useState, useRef, useEffect} from 'react'
 // import styles from "./page.module.css";
+import {Box, Stack, TextField, Button, Typography, Container, AppBar, Toolbar, Grid } from '@mui/material'
+import backgroundGif from '../assets/plane.gif';
+
 
 export default function Home() 
 {
@@ -16,12 +18,19 @@ export default function Home()
 
   return (
   <Box 
-    width="100vw" 
+    width="100%" 
     height="100vh" 
     display="flex"
     flexDirection="column"
     justifyContent="center"
-    alignItems="center">
+    alignItems="center"
+    sx={{
+      backgroundImage: `url(${backgroundGif})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+    }}
+    >
 
     {/* profile items comming soon */}  
     <Stack
@@ -31,7 +40,13 @@ export default function Home()
     border="2px solid black"
     borderRadius={5}
     p={2}
-    spacing={3}>
+    spacing={3}
+    sx={{
+      background: 'linear-gradient(to bottom, rgba(245, 245, 245, 0.9), rgba(0, 44, 74, 0.9))',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      alignItems: 'center',
+    }}
+    >
       <Stack
       direction="column"
       spacing={2}

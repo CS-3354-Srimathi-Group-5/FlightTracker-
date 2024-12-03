@@ -7,7 +7,7 @@ const HomePage = () => {
     return (
         <Box
             sx={{
-                width: '100vw',
+                width: '100%',
                 height: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
@@ -42,11 +42,11 @@ const HomePage = () => {
             <Stack
                 sx={{
                     width: '85%',
-                    height: '75%',
+                    height: '70%',
                     border: '2px solid #ccc',
                     borderRadius: 5,
                     p: 3,
-                    mt: 3,
+                    mt: 5,
                     // background: 'linear-gradient(to bottom, #f5f5f5, #002c4a)',
                     background: 'linear-gradient(to bottom, rgba(245, 245, 245, 0.9), rgba(0, 44, 74, 0.9))',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
