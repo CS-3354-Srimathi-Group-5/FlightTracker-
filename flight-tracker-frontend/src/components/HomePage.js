@@ -1,4 +1,6 @@
 import React from 'react';
+import backgroundGif from '../assets/plane.gif';
+import logo from '../assets/AeroScopeLogo.png';
 import { Box, Stack, Button, Typography, AppBar, Toolbar } from '@mui/material';
 
 const HomePage = () => {
@@ -10,7 +12,12 @@ const HomePage = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                backgroundColor: '#f5f5f5',
+                // backgroundColor: '#f5f5f5',
+                // background: 'linear-gradient(to bottom, #f5f5f5, #59788e)',
+                backgroundImage: `url(${backgroundGif})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
             }}
         >
             {/* Navigation Bar */}
@@ -40,15 +47,17 @@ const HomePage = () => {
                     borderRadius: 5,
                     p: 3,
                     mt: 3,
-                    backgroundColor: '#fff',
+                    // background: 'linear-gradient(to bottom, #f5f5f5, #002c4a)',
+                    background: 'linear-gradient(to bottom, rgba(245, 245, 245, 0.9), rgba(0, 44, 74, 0.9))',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                     alignItems: 'center',
                 }}
             >
-                <Typography variant="h4" color="#0033ff" sx={{ mb: 2 }}>
+                {/* <img src={logo} alt="Description of Image" height={'100'} width={'100'} /> */}
+                <Typography variant="h4" color="#0044ff" sx={{ mb: 2 }}>
                     Welcome to AeroScope!
                 </Typography>
-                <Typography variant="h6" color="#59788e" sx={{ mb: 4 }}>
+                <Typography variant="h6" color="#002c4a" sx={{ mb: 4 }}>
                     DFW International Airport
                 </Typography>
 
@@ -222,12 +231,12 @@ const HomePage = () => {
 
                 <Typography
                     variant="h6"
-                    color="#0033ff"
+                    color="#fff"
                     textAlign="center"
                     sx={{ fontStyle: 'italic', mt: 4 }}
                 >
                     Thank you for visiting! For more information, please go to:{' '}
-                    <a href="https://www.dfwairport.com/" style={{ color: '#0033ff' }}>
+                    <a href="https://www.dfwairport.com/" style={{ color: '#00ddff' }}>
                         dfwairport.com
                     </a>
                 </Typography>

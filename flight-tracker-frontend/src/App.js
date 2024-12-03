@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from './assets/AeroScopeLogo.png';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import HomePage from './components/HomePage';
@@ -12,15 +13,16 @@ const App = () => {
     <Router>
       <Box>
         {/* Navigation bar */}
-        <AppBar position="static" sx={{ backgroundColor: "#59788e" }}>
+        <AppBar position="static" sx={{ backgroundColor: "#002c4a" }}>
           <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <img src={logo} alt="Description of Image" height={'70'} width={'75'} />
+            <Typography variant="h6" sx={{ flexGrow: 1, color:"#fff" }}>
               AeroScope
             </Typography>
-            <Button color="inherit" component={Link} to="/">
+            <Button sx={{color:"#fff"}} component={Link} to="/">
               Home
             </Button>
-            <Button color="inherit" component={Link} to="/profile">
+            <Button sx={{color:"#fff"}} component={Link} to="/profile">
               Profile
             </Button>
           </Toolbar>
