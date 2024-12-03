@@ -36,8 +36,8 @@ export default function Home()
     <Stack
     direct="column"
     width="85%"
-    height="75%"
-    border="2px solid black"
+    height="65%"
+    border="2px solid #ccc"
     borderRadius={5}
     p={2}
     spacing={3}

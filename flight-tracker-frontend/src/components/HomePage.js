@@ -54,7 +54,7 @@ const HomePage = () => {
                 }}
             >
                 {/* <img src={logo} alt="Description of Image" height={'100'} width={'100'} /> */}
-                <Typography variant="h4" color="#0044ff" sx={{ mb: 2 }}>
+                <Typography variant="h4" color="#0044ff" sx={{ fontStyle: 'bold', mb: 2 }}>
                     Welcome to AeroScope!
                 </Typography>
                 <Typography variant="h6" color="#002c4a" sx={{ mb: 4 }}>
