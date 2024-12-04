@@ -69,7 +69,9 @@ const App = () => {
               path="*"
               element={
                 <SignedOut>
-                  <Route path="/sign-up" element={<CenteredContainer><SignUp /></CenteredContainer>} />
+                  <Routes>
+                    <Route path="/" element={<CenteredContainer><SignUp /></CenteredContainer>} />
+                  </Routes>
                 </SignedOut>
               }
             />

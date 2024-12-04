@@ -8,6 +8,19 @@
 // import { useRouter } from 'next/router';
 import {Box, Stack, TextField, Button, Typography, Container, AppBar, Toolbar, Grid } from '@mui/material'
 import backgroundGif from '../assets/plane.gif';
+// import {db} from '../components/firebase'
+// import {
+// collection,
+// doc,
+// getDocs,
+// query,
+// setDoc,
+// deleteDoc,
+// getDoc,
+// addDoc,
+// writeBatch
+// } from 'firebase/firestore'
+
 // import {useState, useRef, useEffect} from 'react'
 // import styles from "./page.module.css";
 
