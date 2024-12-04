@@ -1,12 +1,14 @@
 import React from 'react';
+import logo from './assets/AeroScopeLogo.png';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut, SignIn, SignUp, useClerk } from '@clerk/clerk-react';
+import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut, SignIn, SignUp, useClerk, UserButton } from '@clerk/clerk-react';
 import HomePage from './components/HomePage';
 import FlightBoard from './components/FlightBoard';
 import FlightSearchMap from './components/FlightSearchMap';
 import Profile from './components/Profile';
 import Favorites from './components/Favorites';
+
 
 const clerkPublishableKey = 'pk_test_c2hhcmluZy1taW5rLTkyLmNsZXJrLmFjY291bnRzLmRldiQ'; // Replace with your Clerk publishable key
 
@@ -16,19 +18,22 @@ const App = () => {
       <Router>
         <Box>
           {/* Navigation bar */}
-          <AppBar position="static" sx={{ backgroundColor: "#59788e" }}>
+          <AppBar position="static" sx={{ backgroundColor: "#002c4a" }}>
             <Toolbar>
-              <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              <img src={logo} alt="Description of Image" height={'70'} width={'75'} />
+              <Typography variant="h6" sx={{ flexGrow: 1, color:"#fff" }}>
                 AeroScope
               </Typography>
-              <Button color="inherit" component={Link} to="/">
+              <Button sx={{color:"#fff"}} component={Link} to="/">
                 Home
               </Button>
-              <Button color="inherit" component={Link} to="/profile">
-                Profile
+              <Button sx={{color:"#fff", p:2}} component={Link} to="/profile">
+                Profile 
               </Button>
               <SignedIn>
-                <SignOutButton />
+                {/* <SignOutButton /> */}
+                <UserButton />
+
               </SignedIn>
               <SignedOut>
                 <Button color="inherit" component={Link} to="/sign-in">
@@ -64,7 +69,9 @@ const App = () => {
               path="*"
               element={
                 <SignedOut>
-                  <Welcome />
+                  <Routes>
+                    <Route path="/" element={<CenteredContainer><SignUp /></CenteredContainer>} />
+                  </Routes>
                 </SignedOut>
               }
             />
@@ -95,8 +102,8 @@ const SignOutButton = () => {
 const Welcome = () => {
   return (
     <Box sx={{ textAlign: 'center', marginTop: '20px' }}>
-      <Typography variant="h4">Welcome to AeroScope</Typography>
-      <Typography variant="body1">Please sign in or sign up to continue.</Typography>
+      <Typography variant="h4" sx={{color:"#fff"}}>Welcome to AeroScope</Typography>
+      <Typography variant="body1" sx={{color:"#fff"}}>Please sign in or sign up to continue.</Typography>
     </Box>
   );
 };
@@ -119,5 +126,6 @@ const CenteredContainer = ({ children }) => {
 const ProtectedPage = () => {
   return <div>Protected Content</div>;
 };
+
 
 export default App;
