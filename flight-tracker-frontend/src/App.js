@@ -9,9 +9,8 @@ import FlightSearchMap from './components/FlightSearchMap';
 import Profile from './components/Profile';
 import Favorites from './components/Favorites';
 
-// const clerkPublishableKey = process.env.VITE_CLERK_PUBLISHABLE_KEY;
-const clerkPublishableKey = 'pk_test_c2hhcmluZy1taW5rLTkyLmNsZXJrLmFjY291bnRzLmRldiQ'; // Replace with your Clerk publishable key
 
+const clerkPublishableKey = 'pk_test_c2hhcmluZy1taW5rLTkyLmNsZXJrLmFjY291bnRzLmRldiQ'; // Replace with your Clerk publishable key
 
 const App = () => {
   return (
@@ -34,6 +33,7 @@ const App = () => {
               <SignedIn>
                 {/* <SignOutButton /> */}
                 <UserButton />
+
               </SignedIn>
               <SignedOut>
                 <Button color="inherit" component={Link} to="/sign-in">
@@ -126,5 +126,6 @@ const CenteredContainer = ({ children }) => {
 const ProtectedPage = () => {
   return <div>Protected Content</div>;
 };
+
 
 export default App;
