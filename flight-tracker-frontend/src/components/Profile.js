@@ -58,15 +58,15 @@ export default function Home()
         }
       </Stack>
       <Stack direction="column" spacing={2} height="70%">
-          <h3>Name: Ashraful Islam</h3>
-          <h3>AeroID: AI01010</h3>
+          <h3>Name: Rayyan Waris</h3>
+          <h3>AeroID: RW01010</h3>
           <h3>Status: ACTIVE</h3>
       </Stack>
       <Stack direction="row" spacing={2}>
-        <Button variant = "contained" href="/profile" color="success">Update Info</Button>
-        <Button variant = "contained" href="/profile" >Settings</Button>
+        {/* <Button variant = "contained" href="/profile" color="success">Update Info</Button> */}
+        {/* <Button variant = "contained" href="/profile" >Settings</Button> */}
         <Button variant = "contained" href="/profile/favorites" color="warning">Favorites</Button>
-        <Button variant = "contained" href="/profile" color="error">Delete Account</Button>
+        {/* <Button variant = "contained" href="/profile" color="error">Delete Account</Button> */}
       </Stack>
     </Stack>
   </Box>
