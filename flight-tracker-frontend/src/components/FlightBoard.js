@@ -332,24 +332,28 @@ const FlightBoard = () => {
         </TableHead>
         <TableBody>
           {flights.map((flight, index) => {
-            // Construct tooltip content
-            const tooltipContent = (
-              <Box>
-                <Typography variant="body2" fontWeight="bold">
-                  {flight.airline} {flight.flightNumber}
-                </Typography>
-                <Typography variant="caption">
-                  {type === 'arrival' 
-                    ? `From: ${flight.departure.airport} (${flight.departure.iata})` 
-                    : `To: ${flight.arrival.airport} (${flight.arrival.iata})`
-                  }
-                </Typography>
-                <Typography variant="caption">
-                  Status: {flight.status}
-                </Typography>
-              </Box>
-            );
-
+            // Determine status color
+            let statusColor = '';
+            switch (flight.status.toLowerCase()) {
+              case 'scheduled':
+                statusColor = 'rgba(255, 255, 0, 0.3)'; // Light Yellow
+                break;
+              case 'delayed':
+                statusColor = 'rgba(255, 0, 0, 0.3)'; // Light Red
+                break;
+              case 'cancelled':
+                statusColor = 'rgba(255, 0, 0, 0.3)'; // Light Red
+                break;
+              case 'landed':
+                statusColor = 'rgba(0, 255, 0, 0.3)'; // Light Green
+                break;
+              case 'active':
+                statusColor = 'rgba(255, 200, 124)'; // Light Orange
+                break;
+              default:
+                statusColor = 'rgba(211, 211, 211, 0.3)'; // Light Gray for unknown statuses
+            }
+  
             return (
               <TableRow key={index}>
                 <TableCell>{flight.flightNumber}</TableCell>
@@ -357,21 +361,41 @@ const FlightBoard = () => {
                 <TableCell>
                   {type === 'arrival' ? flight.departure.iata : flight.arrival.iata}
                 </TableCell>
-                <TableCell>{flight.status}</TableCell>
+                <TableCell
+                  sx={{
+                    backgroundColor: statusColor,
+                    borderRadius: '4px',
+                    textAlign: 'center',
+                  }}
+                >
+                  {flight.status}
+                </TableCell>
                 <TableCell>
                   {type === 'arrival'
                     ? formatTimeToCentral(flight.arrival.scheduled)
                     : formatTimeToCentral(flight.departure.scheduled)}
                 </TableCell>
                 <TableCell>
-                  <Tooltip 
-                    title={tooltipContent} 
-                    placement="right" 
+                  <Tooltip
+                    title={
+                      <Box>
+                        <Typography variant="body2" fontWeight="bold">
+                          {flight.airline} {flight.flightNumber}
+                        </Typography>
+                        <Typography variant="caption">
+                          {type === 'arrival'
+                            ? `From: ${flight.departure.airport} (${flight.departure.iata})`
+                            : `To: ${flight.arrival.airport} (${flight.arrival.iata})`}
+                        </Typography>
+                        <Typography variant="caption">Status: {flight.status}</Typography>
+                      </Box>
+                    }
+                    placement="right"
                     arrow
                   >
-                    <Button 
-                      variant="outlined" 
-                      color="primary" 
+                    <Button
+                      variant="outlined"
+                      color="primary"
                       size="small"
                       onClick={() => handleOpenFlightDetails(flight, type)}
                     >
@@ -386,6 +410,7 @@ const FlightBoard = () => {
       </Table>
     </TableContainer>
   );
+  
 
   return (
     <Box sx={{
