@@ -107,7 +107,7 @@ const FlightSearchMap = () => {
       width: '100%',
       minheight: '100vh',
       position: 'relative',
-      padding: 4,
+      padding: 10,
       backgroundImage: `url(${backgroundGif})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',

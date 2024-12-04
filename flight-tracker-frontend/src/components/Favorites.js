@@ -67,9 +67,9 @@ export default function Home()
       border="2px solid #ccc"
       borderRadius={5}
       p={3}
-      spacing={3}
+      spacing={4}
       sx={{
-        mt: 6,
+        mt: 8,
         // background: 'linear-gradient(to bottom, #f5f5f5, #002c4a)',
         background: 'linear-gradient(to bottom, rgba(245, 245, 245, 0.9), rgba(0, 44, 74, 0.9))',
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -87,7 +87,7 @@ export default function Home()
         }
       </Stack>
       {/* plane #1 */}
-      <Stack direction="column" spacing={2} height="70%" border="1px solid black" borderRadius={5} padding={4}>
+      <Stack direction="column" spacing={3} height="75%" backgroundColor='#f5f5f5' border="1px solid black" borderRadius={5} padding={3}>
           <h3>Aircraft Name: AirBus A380</h3>
           <h3>Flight Number: 0123456789</h3>
           <h3>Flight Status: IN TRANSIT</h3>
@@ -99,7 +99,7 @@ export default function Home()
           <Stack direction="row" spacing={2} height="70%" padding={1}> <Button variant = "contained" href="/profile/favorites" color="error">Delete</Button> </Stack>
       </Stack>
         {/* plane #2 */}
-      <Stack direction="column" spacing={2} height="70%" border="1px solid black" borderRadius={5} padding={4}>
+      <Stack direction="column" spacing={3} height="75%" backgroundColor='#f5f5f5' border="1px solid black" borderRadius={5} padding={3}>
           <h3>Aircraft Name: Boeing B37</h3>
           <h3>Flight Number: 9876543210</h3>
           <h3>Flight Status: FATAL ERROR!</h3>
