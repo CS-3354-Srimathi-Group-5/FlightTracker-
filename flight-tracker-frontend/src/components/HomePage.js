@@ -54,12 +54,30 @@ const HomePage = () => {
                 }}
             >
                 {/* <img src={logo} alt="Description of Image" height={'100'} width={'100'} /> */}
-                <Typography variant="h4" color="#0044ff" sx={{ fontStyle: 'bold', mb: 2 }}>
+                <Typography
+                    variant="h4"
+                    color="#0044ff"
+                    sx={{
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 'bold',
+                        mb: 2,
+                    }}
+                >
                     Welcome to AeroScope!
                 </Typography>
-                <Typography variant="h6" color="#002c4a" sx={{ mb: 4 }}>
+
+                <Typography
+                    variant="h6"
+                    color="#002c4a"
+                    sx={{
+                        fontFamily: 'Roboto, sans-serif',
+                        fontStyle: 'italic',
+                        mb: 4,
+                    }}
+                >
                     DFW International Airport
                 </Typography>
+
 
                 {/* Section Links */}
                 <Stack
@@ -79,6 +97,8 @@ const HomePage = () => {
                             p: 3,
                             borderRadius: 2,
                             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            fontFamily: 'Roboto, sans-serif',
+                            fontStyle: 'italic',
                         }}
                     >
                         <Typography variant="h5">Flight Info</Typography>
@@ -137,6 +157,8 @@ const HomePage = () => {
                             p: 3,
                             borderRadius: 2,
                             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            fontFamily: 'Roboto, sans-serif',
+                            fontStyle: 'italic',
                         }}
                     >
                         <Typography variant="h5">Transportation</Typography>
@@ -195,6 +217,8 @@ const HomePage = () => {
                             p: 3,
                             borderRadius: 2,
                             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                            fontFamily: 'Roboto, sans-serif',
+                            fontStyle: 'italic',
                         }}
                     >
                         <Typography variant="h5">Shop at DFW</Typography>
