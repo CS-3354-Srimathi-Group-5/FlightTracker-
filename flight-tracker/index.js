@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 
 // AviationStack API Key
-const API_KEY = process.env.API_KEY || '9806658acd76f2bf3bebfac9d15d078d'; // Replace with your actual API key
+const API_KEY = process.env.API_KEY; // Replace with your actual API key
 
 // Function to calculate flight duration
 function calculateFlightDuration(flight) {
